@@ -18,7 +18,20 @@ function computerPlay() {
     }
 }
 
+function checkIfValidSelection(playerSelection) {
+    if (playerSelection === "Scissors" || playerSelection === "Rock" || playerSelection === "Paper")
+        return true;
+    else
+        return false;
+}
+
 function playRound(playerSelection, computerSelection){
+    playerSelection = playerSelection.toLowerCase();
+    playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1);
+
+    if(!checkIfValidSelection(playerSelection))
+        return "Wrong selection! You can only choose rock paper or scissors!";
+
     console.log(`Computer plays ${computerSelection}`);
     if(playerSelection === computerSelection)
         return "It's a tie! Play again."
@@ -33,6 +46,8 @@ function playRound(playerSelection, computerSelection){
     
 }
 
-console.log(playRound("Scissors", computerPlay()));
+let playerSelection = prompt('Duel! Rock, paper or scissors!?');
+
+console.log(playRound(playerSelection, computerPlay()));
 
 

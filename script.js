@@ -26,8 +26,11 @@ function checkIfValidSelection(playerSelection)
         return false;
 }
 
-function playRound(playerSelection, computerSelection)
+function playRound(e)
 {
+    let playerSelection = this.innerText;
+    let computerSelection = computerPlay();
+
     playerSelection = playerSelection.toLowerCase();
     playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1);
 
@@ -94,6 +97,11 @@ function game()
         
 }
 
- game();
+
+const buttons = document.querySelectorAll('.buttons button');
+buttons.forEach(button => {
+    button.addEventListener('click', playRound);
+});
+ //game();
 
 

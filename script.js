@@ -18,14 +18,6 @@ function computerPlay() {
     }
 }
 
-function checkIfValidSelection(playerSelection) 
-{
-    if (playerSelection === "Scissors" || playerSelection === "Rock" || playerSelection === "Paper")
-        return true;
-    else
-        return false;
-}
-
 function playRound(e)
 {
     let playerSelection = this.innerText;
@@ -34,19 +26,20 @@ function playRound(e)
     playerSelection = playerSelection.toLowerCase();
     playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1);
 
-    if(!checkIfValidSelection(playerSelection))
-        return "lose";
-
     console.log(`Computer plays ${computerSelection}`);
     if(playerSelection === computerSelection)
-        return "tie"
+    {
+        mainText.textContent = `Computer played ${computerSelection}. It's a tie! Choose again!`
+    }
     else if ((playerSelection === "Scissors" && computerSelection === "Paper") || 
     (playerSelection === "Paper" && computerSelection === "Rock") || 
     (playerSelection === "Rock" && computerSelection === "Scissors")) {
-        return "win"
+        mainText.textContent = `Computer played ${computerSelection}. You win!`
+        playerScore++;
     }
     else {
-        return "lose"
+        mainText.textContent = `Computer played ${computerSelection}. You lose!`
+        compScore++;
     }
     
 }
@@ -97,11 +90,15 @@ function game()
         
 }
 
+let playerScore = 0;
+let compScore = 0;
+
+let mainText = document.querySelector('.game-text')
 
 const buttons = document.querySelectorAll('.buttons button');
 buttons.forEach(button => {
     button.addEventListener('click', playRound);
 });
- //game();
+ game();
 
 

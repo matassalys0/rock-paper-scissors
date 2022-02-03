@@ -19,7 +19,19 @@ function computerPlay() {
 }
 
 function gameEnd() {
-    
+    const winText = document.createElement('p');
+
+    if(playerScore > 4) winText.textContent = "You win! Congratulations! Refresh the page to play again!"
+    else winText.textContent = "You lose! Better luck next time! Refresh the page to play again!"
+
+    const div = document.querySelector('.text-div');
+    div.appendChild(winText);
+
+    document.body.style.backgroundColor = 'lime';
+
+    buttons.forEach(button => {
+        button.removeEventListener('click', playRound);
+    });
 }
 
 function playRound(e)
@@ -45,52 +57,6 @@ function playRound(e)
     scoreText.textContent = `Current score: You - ${playerScore}, computer - ${compScore}`;
 
     if(playerScore > 4 || compScore > 4) gameEnd();
-}
-
-function game() 
-{
-    let playerScore = 0;
-    let compScore = 0;
-
-    for(let i = 0; i <= 4; i++) 
-    {
-       console.log(`Round ${i + 1}, let's go!`) 
-       console.log(`Current score: You - ${playerScore}, computer - ${compScore}`);
-       let playerSelection = prompt('Duel! Rock, paper or scissors!? If you put something else you lose automatically!');
-       let result = playRound(playerSelection, computerPlay());
-
-       switch(result) {
-           case "win": 
-                console.log("You win!");
-                playerScore++;
-                break;
-
-           case "lose":
-                console.log("You lose!");
-                compScore++;
-                break;
-
-           default:
-                console.log("It's a tie!");
-       } 
-    }
-
-    if(playerScore > compScore) 
-    {
-        console.log("End of the game! You win!");
-        console.log(`Final score: You - ${playerScore}, computer - ${compScore}`);
-    }
-    else if (compScore > playerScore)
-    {
-        console.log("End of the game! You lose!");
-        console.log(`Final score: You - ${playerScore}, computer - ${compScore}`);
-    } 
-    else 
-    {
-        console.log("End of the game! It's a tie!");
-        console.log(`Final score: You - ${playerScore}, computer - ${compScore}`);
-    }
-        
 }
 
 let playerScore = 0;

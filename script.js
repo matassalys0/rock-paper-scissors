@@ -18,15 +18,15 @@ function computerPlay() {
     }
 }
 
+function gameEnd() {
+    
+}
+
 function playRound(e)
 {
     let playerSelection = this.innerText;
     let computerSelection = computerPlay();
 
-    playerSelection = playerSelection.toLowerCase();
-    playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1);
-
-    console.log(`Computer plays ${computerSelection}`);
     if(playerSelection === computerSelection)
     {
         mainText.textContent = `Computer played ${computerSelection}. It's a tie! Choose again!`
@@ -42,6 +42,9 @@ function playRound(e)
         compScore++;
     }
     
+    scoreText.textContent = `Current score: You - ${playerScore}, computer - ${compScore}`;
+
+    if(playerScore > 4 || compScore > 4) gameEnd();
 }
 
 function game() 
@@ -93,12 +96,13 @@ function game()
 let playerScore = 0;
 let compScore = 0;
 
-let mainText = document.querySelector('.game-text')
+const mainText = document.querySelector('.game-text')
+const scoreText = document.querySelector('.game-score')
 
 const buttons = document.querySelectorAll('.buttons button');
 buttons.forEach(button => {
     button.addEventListener('click', playRound);
 });
- game();
+
 
 
